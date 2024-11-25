@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlayerData" load_steps=2 format=3 uid="uid://ddn7nb4x2ks4u"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerData.gd" id="1_8gkdr"]
+
+[resource]
+script = ExtResource("1_8gkdr")
+player_name = "main_player"
+player_coins = 0
+player_energy = 100

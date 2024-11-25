@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://pflhiavhdocr"]
+
+[ext_resource type="Script" path="res://Scripts/Block.gd" id="1_q2k2j"]
+[ext_resource type="FontFile" uid="uid://b3a2j8uitem0t" path="res://Assets/Fonts/FredokaOne-Regular.ttf" id="1_taqt6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_485ck"]
+size = Vector2(100, 53)
+
+[node name="Block" type="Control" groups=["Enemy"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -440.0
+offset_bottom = -860.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q2k2j")
+colors = Array[Color]([Color(0.240071, 0.479249, 0.35428, 1), Color(0.778313, 0.197034, 0.181346, 1), Color(0.238369, 0.476265, 0.738246, 1), Color(0.600136, 0.442263, 0.283376, 1), Color(0.663114, 0.624112, 0.309176, 1), Color(0.909273, 0.768837, 0.914136, 1), Color(0.47451, 0.74902, 0.909804, 1)])
+
+[node name="BackGround" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.47314, 0.750767, 0.911835, 1)
+
+[node name="HealthLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_taqt6")
+theme_override_font_sizes/font_size = 70
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Body" type="Area2D" parent="." groups=["Enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+position = Vector2(50, 73.5)
+shape = SubResource("RectangleShape2D_485ck")
+
+[connection signal="area_entered" from="Body" to="." method="_on_body_area_entered"]

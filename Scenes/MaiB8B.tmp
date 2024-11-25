@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgrfxyqlp6rhh"]
+
+[ext_resource type="PackedScene" uid="uid://calta5b6add45" path="res://Scenes/Player.tscn" id="2_kdaxm"]
+[ext_resource type="PackedScene" uid="uid://41fcamrlprmy" path="res://Scenes/Enemy.tscn" id="2_wfy52"]
+[ext_resource type="PackedScene" uid="uid://bbog7n8ihxe47" path="res://Scenes/InputManager.tscn" id="3_mwox2"]
+
+[node name="MainScene" type="Node"]
+
+[node name="EnemySpawnPoint" type="Marker2D" parent="."]
+position = Vector2(240, -100)
+
+[node name="Enemy" parent="." instance=ExtResource("2_wfy52")]
+position = Vector2(259, 138)
+
+[node name="Player" parent="." instance=ExtResource("2_kdaxm")]
+position = Vector2(279, 705)
+scale = Vector2(0.5, 0.5)
+
+[node name="DebugLog" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="InputManager" parent="." instance=ExtResource("3_mwox2")]
+
+[connection signal="drag" from="InputManager" to="Player" method="_on_input_manager_drag"]
+[connection signal="single_touch" from="InputManager" to="Player" method="_on_input_manager_single_touch"]
+[connection signal="touch" from="InputManager" to="Player" method="_on_input_manager_touch"]
