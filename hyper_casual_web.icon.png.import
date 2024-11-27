@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cgy4bscq8bgk3"
-path="res://.godot/imported/hyper_casual_web.icon.png-95420b7b1c7f383e0a78a5d47f327295.ctex"
+path="res://.godot/imported/hyper_casual_web.icon.png-0c5432eafddd04dad18f559c980f90c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Build/hyper_casual_web.icon.png"
-dest_files=["res://.godot/imported/hyper_casual_web.icon.png-95420b7b1c7f383e0a78a5d47f327295.ctex"]
+source_file="res://hyper_casual_web.icon.png"
+dest_files=["res://.godot/imported/hyper_casual_web.icon.png-0c5432eafddd04dad18f559c980f90c5.ctex"]
 
 [params]
 

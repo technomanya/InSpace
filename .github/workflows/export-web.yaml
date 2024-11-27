@@ -1,0 +1,41 @@
+name: Export Godot Project for Web
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Godot
+        run: |
+          GODOT_URL="https://downloads.tuxfamily.org/godotengine/4.0/Godot_v4.0-stable_linux.x86_64.zip"
+          wget $GODOT_URL -O godot.zip
+          mkdir -p godot
+          unzip godot.zip -d godot
+          chmod +x godot/Godot_v4.0-stable_linux.x86_64
+        shell: bash
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Up Godot Export
+        uses: firebelley/godot-export@v6.0.0
+        with:
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.0/Godot_v4.0-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.0/Godot_v4.0-stable_export_templates.tpz
+          relative_project_path: ./
+          presets_to_export: HTML5
+          archive_output: true
+
+      - name: Upload Exported Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Web Export
+          path: build/*
