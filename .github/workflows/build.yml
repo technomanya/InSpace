@@ -31,7 +31,7 @@ jobs:
       - name: Export Web Build
         run: |
           mkdir -p export/web
-          ./godot/Godot_v4.0-stable_linux.x86_64 --headless --export "HTML5" export/web/index.html
+          ./godot/Godot_v4.0-stable_linux.x86_64 --headless --export-release "HTML5" export/web/index.html
         shell: bash
 
       # Step 4: Upload the exported Web files as artifacts
