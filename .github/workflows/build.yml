@@ -1,4 +1,4 @@
-name: Build and Export Godot Project
+name: Build and Export Godot Web Project
 
 on:
   push:
@@ -11,24 +11,38 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        platform: [windows, mac, linux]
     steps:
+      # Step 1: Checkout the repository
       - uses: actions/checkout@v2
         with:
           lfs: true
 
+      # Step 2: Set up Godot and export templates
       - name: Set up Godot
         uses: firebelley/godot-export@v6.0.0
         with:
           godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.0/Godot_v4.0-stable_linux.x86_64.zip
           godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.0/Godot_v4.0-stable_export_templates.tpz
           relative_project_path: ./
-          archive_output: true
+          export_presets_path: export_presets.cfg # Ensure this is your correct export presets file path.
 
+      # Step 3: Export the project for Web (HTML5)
+      - name: Export Web Build
+        run: |
+          mkdir -p export/web
+          ./godot --export "HTML5" export/web/index.html
+
+      # Step 4: Upload the exported Web files as artifacts
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: Exported Project - ${{ matrix.platform }}
-          path: ${{ steps.export.outputs.archive_directory }}/*
+          name: Web Export
+          path: export/web/
+      
+      # Step 5: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: export/web
+
